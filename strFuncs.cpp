@@ -11,6 +11,7 @@ using namespace std;
  * the case for the letters (upper or lower) should not
  * affect your result
  */
+<<<<<<< HEAD
 
 string removepunct(string input){
 	string phrase = input;
@@ -49,6 +50,15 @@ bool isAnagram(string s1, string s2){
 	
 	
 }
+=======
+bool isAnagram(string s1, string s2){
+    int strl= strlen(s1);
+    for(int i=0; i<strl; i++){
+
+    return true;
+}
+
+>>>>>>> c4836868727ab12a573ee1b236993aad4199af77
 /* Precondition: s1 is a valid string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You may provide a recursive OR non-recursive solution*/
