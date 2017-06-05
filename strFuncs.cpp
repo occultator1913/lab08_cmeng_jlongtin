@@ -5,60 +5,42 @@
 #include "strFuncs.h"
 using namespace std;
 
+string sort(string s);
+string makelower(string phrase);
+string removePunct(string input);
+
 
 /* Precondition: Two valid strings s1 and s2, each containing a mix of alphabets, spaces and punctuations
  * Post condition: Return true if one string is an anagram of the other string. White spaces, punctuations and
  * the case for the letters (upper or lower) should not
  * affect your result
  */
-<<<<<<< HEAD
 
-string removepunct(string input){
-	string phrase = input;
-	int c = 0;
-	for(int i = 0; i<input.length();i++){
-		if(isalpha(input[i])){
-			phrase[c]= input[i];
-			c = c++;	
-		}
-	}
-	return phrase.substr(0,c);
-}
 
-string makelower(string phrase){
-	for(int i = 0; i<phrase.length();i++){
-		phrase[i] = tolower(phrase[i]);
-	}
-	return phrase;
-}
-string sort(string s){
-	int lowest;
-	string out;
-	for(int i = 0; i<s.length();i++){
-		for(int j = 0;j<s.length();j++){
-			if(s[j]<s[lowest] || j == 0){
-				lowest = j;
-			}
-		}
-		out[i] = s[lowest];
-		s[lowest] = z
-	}
-	return out;
-}
-		
+
 bool isAnagram(string s1, string s2){
-	
-	
-}
-=======
-bool isAnagram(string s1, string s2){
-    int strl= strlen(s1);
-    for(int i=0; i<strl; i++){
+    string s1_rmpunct=removePunct(s1);
+    string s2_rmpunct=removePunct(s2);
+    string s1_sort = sort(s1_rmpunct);
+    string s2_sort = sort(s2_rmpunct);
+    string s1_final = makelower(s1_sort);
+    string s2_final = makelower(s2_sort);
 
-    return true;
+    int str1= s1.length(); 
+    int str2= s2.length();
+    
+    if (str1!=str2)  return false;
+    else { 
+        for(int i=0; i<str1; i++){
+            if(s1_final[i]!=s2_final[i])
+                return false;
+           }     
+            return true;
+    }
 }
 
->>>>>>> c4836868727ab12a573ee1b236993aad4199af77
+
+
 /* Precondition: s1 is a valid string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You may provide a recursive OR non-recursive solution*/
@@ -80,6 +62,49 @@ bool isPalindrome(const char *s1){
 bool isPalindromeIterative(const char *s1){
     return true;
 }
+
+
+string sort(string s){
+    int lowest=0;
+    string out;
+    int length_str = s.length();
+    for(int i = 0; i<length_str;i++){
+        for(int j = 0 ; j <length_str;j++){
+            int temp2 = atoi(s[j]);
+            int temp1 = atoi(s[lowest]);
+            if(temp2 < temp1 || j == 0)
+                lowest = j;
+        }
+        out[i] = s[lowest];
+        s.erase(lowest,length_str);
+        lowest = 0;
+    }
+    return out;
+}
+
+
+string removePunct(string input){
+     string phrase = input;
+     int c = 0;
+     int length_str = input.length();
+     for(int i = 0; i<length_str;i++){
+         if(isalpha(input[i])){
+                phrase[c]= input[i];
+                     c++;
+         }
+        
+     }
+return phrase.substr(0,c);
+}
+
+string makeLower(string phrase){
+      int length_str = phrase.length();
+      for(int i = 0; i<length_str;i++){
+            phrase[i] = tolower(phrase[i]);
+      }
+return phrase;
+}
+
 
 
 
