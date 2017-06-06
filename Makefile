@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wno-uninitialized
 
 BINARIES= isAnagramTest 
 
-COMMON_OBJECT_FILES = strFuncs.o 
+COMMON_OBJECT_FILES = strFuncs.o tddFuncs.o 
 
 all: ${BINARIES}
 

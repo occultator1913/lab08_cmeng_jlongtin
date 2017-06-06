@@ -6,8 +6,9 @@
 using namespace std;
 
 string sort(string s);
-string makelower(string phrase);
+string makeLower(string phrase);
 string removePunct(string input);
+bool isPalindromeHelper(const char *s1, int len);
 
 
 /* Precondition: Two valid strings s1 and s2, each containing a mix of alphabets, spaces and punctuations
@@ -16,15 +17,25 @@ string removePunct(string input);
  * affect your result
  */
 
+int main() {
+    string a = "RADIANT Damn,, hot";
 
+    cout<<"a: " << a<<endl;
+    string a2 =removePunct(a);
+    cout<<"a2: "<<a2<<endl;
+    string a3 = makeLower(a2);
+    cout <<"a3: "<<a3 <<endl;
+    string a4 =sort(a3);
+    cout<<"a4: " << a4<<endl;
+}
 
 bool isAnagram(string s1, string s2){
     string s1_rmpunct=removePunct(s1);
     string s2_rmpunct=removePunct(s2);
     string s1_sort = sort(s1_rmpunct);
     string s2_sort = sort(s2_rmpunct);
-    string s1_final = makelower(s1_sort);
-    string s2_final = makelower(s2_sort);
+    string s1_final = makeLower(s1_sort);
+    string s2_final = makeLower(s2_sort);
 
     int str1= s1.length(); 
     int str2= s2.length();
@@ -45,10 +56,13 @@ bool isAnagram(string s1, string s2){
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You may provide a recursive OR non-recursive solution*/
 bool isPalindrome(const string s1){
+    int strlen = s1.length();
+    if(strlen < 0) 
+    for(int i = 0; i<strlen;i++)
     return true;
 }
 
-bool isPalindromeHelper(const char *s1, int len);
+
 /* Precondition: s1 is a valid C-string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You MUST provide a recursive implementation and are recommended to write a helper function where the recursion actually takes place*/
@@ -58,25 +72,42 @@ bool isPalindrome(const char *s1){
 
 /* Precondition: s1 is a valid C-string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
- *You MUST provide an iterative implementation */
+ *You MUST provide yan iterative implementation */
 bool isPalindromeIterative(const char *s1){
-    return true;
+    if(s1 == 0)
+        return false;
+    if(s1[0] == 0)
+        return true;
+    int len = strlen(s1);
+    if s1[0] == s1[len-1];
+        result = isPalidromeHelper(s1+1,len-2);
 }
 
+
+bool isPalindromeHelper(const char *s1, int len){
+    if (len <= 1)
+        return true;
+    if(s1[0]==s1[len-1])
+        return isPalidromeHelper(s1+1,len-2);
+    else
+        return false;
+}
 
 string sort(string s){
     int lowest=0;
     string out;
     int length_str = s.length();
     for(int i = 0; i<length_str;i++){
-        for(int j = 0 ; j <length_str;j++){
-            int temp2 = atoi(s[j]);
-            int temp1 = atoi(s[lowest]);
+        for(int j = 0 ; j <(length_str-1);j++){
+            int temp2 = (int)(s[j]);
+            int temp1 = (int)(s[lowest]);
+            cout<<temp2<< " "<<temp1<<endl;
             if(temp2 < temp1 || j == 0)
                 lowest = j;
         }
+        
         out[i] = s[lowest];
-        s.erase(lowest,length_str);
+        s.erase(s[lowest],1);
         lowest = 0;
     }
     return out;
