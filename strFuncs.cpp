@@ -17,37 +17,21 @@ bool isPalindromeHelper(const char *s1, int len);
  * affect your result
  */
 
-int main() {
-    string a = "RADIANT Damn,, hot";
-
-    cout<<"a: " << a<<endl;
-    string a2 =removePunct(a);
-    cout<<"a2: "<<a2<<endl;
-    string a3 = makeLower(a2);
-    cout <<"a3: "<<a3 <<endl;
-    string a4 =sort(a3);
-    cout<<"a4: " << a4<<endl;
-}
 
 bool isAnagram(string s1, string s2){
     string s1_rmpunct=removePunct(s1);
     string s2_rmpunct=removePunct(s2);
-    string s1_sort = sort(s1_rmpunct);
-    string s2_sort = sort(s2_rmpunct);
-    string s1_final = makeLower(s1_sort);
-    string s2_final = makeLower(s2_sort);
+    string s1_lower = makeLower(s1_rmpunct);
+    string s2_lower = makeLower(s2_rmpunct);
+    string s1_sorted = sort(s1_lower);
+    string s2_sorted = sort(s2_lower);
 
-    int str1= s1.length(); 
-    int str2= s2.length();
-    
-    if (str1!=str2)  return false;
-    else { 
-        for(int i=0; i<str1; i++){
-            if(s1_final[i]!=s2_final[i])
-                return false;
-           }     
-            return true;
-    }
+
+    if(s1_sorted==s2_sorted){
+	return true;
+   }else{
+	return false;
+  }
 }
 
 
@@ -74,13 +58,15 @@ bool isPalindrome(const char *s1){
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You MUST provide yan iterative implementation */
 bool isPalindromeIterative(const char *s1){
-    if(s1 == 0)
-        return false;
-    if(s1[0] == 0)
-        return true;
-    int len = strlen(s1);
-    if s1[0] == s1[len-1];
-        result = isPalidromeHelper(s1+1,len-2);
+    string s(s1);
+    string s1_rmpunct=removePunct(s);
+    string s1_lower = makeLower(s1_rmpunct);
+    for(int i = 0; i<(s.length()/2);i++){
+	if(s1[i]!=s1[s.length()-i]) return false;
+    }
+    
+    return true;
+    
 }
 
 
@@ -88,27 +74,24 @@ bool isPalindromeHelper(const char *s1, int len){
     if (len <= 1)
         return true;
     if(s1[0]==s1[len-1])
-        return isPalidromeHelper(s1+1,len-2);
+        return isPalindromeHelper(s1+1,len-2);
     else
         return false;
 }
 
 string sort(string s){
     int lowest=0;
-    string out;
+    string out = s;
     int length_str = s.length();
     for(int i = 0; i<length_str;i++){
-        for(int j = 0 ; j <(length_str-1);j++){
-            int temp2 = (int)(s[j]);
-            int temp1 = (int)(s[lowest]);
-            cout<<temp2<< " "<<temp1<<endl;
-            if(temp2 < temp1 || j == 0)
-                lowest = j;
+	lowest = 0;
+        for(int j = 1 ; j <s.length();j++){
+            if (s[j]<s[lowest]){
+            	lowest = j;
         }
-        
+        }
         out[i] = s[lowest];
-        s.erase(s[lowest],1);
-        lowest = 0;
+        s.erase(lowest,1);
     }
     return out;
 }
