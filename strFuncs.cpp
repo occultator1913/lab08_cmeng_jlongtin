@@ -40,9 +40,10 @@ bool isAnagram(string s1, string s2){
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You may provide a recursive OR non-recursive solution*/
 bool isPalindrome(const string s1){
-    int strlen = s1.length();
-    if(strlen < 0) 
-    for(int i = 0; i<strlen;i++)
+    int length = s1.length();
+    for(int i = 0; i<(length/2);i++){
+	if(tolower(s1[i])!=tolower(s1[length-i-1])) return false;
+    }
     return true;
 }
 
@@ -51,18 +52,21 @@ bool isPalindrome(const string s1){
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You MUST provide a recursive implementation and are recommended to write a helper function where the recursion actually takes place*/
 bool isPalindrome(const char *s1){
-    return true;
+    if(strlen(s1)<2) return true;
+    if(tolower(s1[0])==tolower(s1[strlen(s1)-1])){
+	isPalindromeHelper(s1+1, strlen(s1)-2);
+    }else{
+	return false;
+   }
+   return true;
 }
 
 /* Precondition: s1 is a valid C-string that may contain upper or lower case alphabets, no spaces or special characters
  * Postcondition: Returns true if s1 is a palindrome, false otherwise
  *You MUST provide yan iterative implementation */
 bool isPalindromeIterative(const char *s1){
-    string s(s1);
-    string s1_rmpunct=removePunct(s);
-    string s1_lower = makeLower(s1_rmpunct);
-    for(int i = 0; i<(s.length()/2);i++){
-	if(s1[i]!=s1[s.length()-i]) return false;
+    for(int i = 0; i<(strlen(s1)/2);i++){
+	if(tolower(s1[i])!=tolower(s1[strlen(s1)-i-1])) return false;
     }
     
     return true;
@@ -73,10 +77,11 @@ bool isPalindromeIterative(const char *s1){
 bool isPalindromeHelper(const char *s1, int len){
     if (len <= 1)
         return true;
-    if(s1[0]==s1[len-1])
+    if(tolower(s1[0])==tolower(s1[len-1])){
         return isPalindromeHelper(s1+1,len-2);
-    else
+    }else{
         return false;
+    }
 }
 
 string sort(string s){
@@ -118,6 +123,13 @@ string makeLower(string phrase){
       }
 return phrase;
 }
+
+
+
+
+
+
+
 
 
 
